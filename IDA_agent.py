@@ -59,20 +59,20 @@ class Agent(pygame.sprite.Sprite):
             if g + self.heuristic(current, goal) > limit:
                 return None
             for neighbor in self.get_neighbors(*current):
-                if neighbor not in path:  # Avoid loops
+                if neighbor not in path: 
                     new_path = path + [neighbor]
                     result = dfs(new_path, g + 1, limit)
                     if result:
                         return result
             return None
 
-        # Iterative deepening
+    
         limit = self.heuristic(start, goal)
         while True:
             path = dfs([start], 0, limit)
             if path:
                 return path
-            limit += 1  # Increase the limit and try again
+            limit += 1 
 
     def find_nearest_task(self):
         """Find the nearest task using IDA*."""
@@ -84,7 +84,7 @@ class Agent(pygame.sprite.Sprite):
                 shortest_path = path
                 nearest_task = task_position
         if shortest_path:
-            self.path = shortest_path[1:]  # Exclude the current position
+            self.path = shortest_path[1:]  
             self.moving = True
 
     def heuristic(self, pos, goal):
